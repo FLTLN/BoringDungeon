@@ -307,27 +307,6 @@ void createRoads(POINT * from, POINT * to, ROOM * rooms, ROOM * next_room)
 
 	rooms->with_road = 1;
 	next_room->with_road = 1;
-
-	if (rooms->UN_N == next_room->number)
-	{
-		rooms->UN_R = 1;
-		next_room->BN_R = 1;
-	}
-	if (rooms->BN_N == next_room->number)
-	{
-		rooms->BN_R = 1;
-		next_room->UN_R = 1;
-	}
-	if (rooms->LN_N == next_room->number)
-	{
-		rooms->LN_R = 1;
-		next_room->RN_R = 1;
-	}
-	if (rooms->RN_N == next_room->number)
-	{
-		rooms->RN_R = 1;
-		next_room->LN_R = 1;
-	}
 }
 
 

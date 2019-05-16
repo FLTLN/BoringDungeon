@@ -9,8 +9,8 @@ void main()
 	srand(time(NULL));
 	PAR maze_par;
 
-	maze_par.W = 40;
-	maze_par.H = 55;
+	maze_par.W = 400;
+	maze_par.H = 550;
 
 	maze_par.max_W = 15;
 	maze_par.max_H = 15;
