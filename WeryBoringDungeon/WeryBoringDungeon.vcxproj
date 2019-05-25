@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphicsOutput.h" />
     <ClInclude Include="mazeGenerator.h" />
     <ClInclude Include="mazeTestPrinter.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="graphicsOutput.cpp" />
     <ClCompile Include="mazeGenerator.cpp" />
     <ClCompile Include="mazeTestPrinter.cpp" />
     <ClCompile Include="Source.cpp" />
