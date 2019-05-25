@@ -78,13 +78,12 @@ void main()
 		refresh_textures(&spase, example);
 		draw_all(&spase);
 
-		if (clock.getElapsedTime().asSeconds() > 1/2)
-		{
-			clock.restart();
-			can_move = 1;
-		}
+		//if (clock.getElapsedTime().asSeconds() > 0.2)
+		//{
+		//	can_move = 1;
+		//}
 
-		if (can_move)
+		if (clock.getElapsedTime().asSeconds() > 0.2)
 		{
 			can_move = 0;
 			if (Keyboard::isKeyPressed(Keyboard::Left))
@@ -97,7 +96,8 @@ void main()
 					refresh_array(pos, pos_new, example);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
-					can_move = 0;
+					//can_move = 0;
+					clock.restart();
 				}
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Right))
@@ -110,7 +110,8 @@ void main()
 					refresh_array(pos, pos_new, example);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
-					can_move = 0;
+					//can_move = 0;
+					clock.restart();
 				}
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Up))
@@ -123,7 +124,8 @@ void main()
 					refresh_array(pos, pos_new, example);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
-					can_move = 0;
+					//can_move = 0;
+					clock.restart();
 				}
 			}
 			if (Keyboard::isKeyPressed(Keyboard::Down))
@@ -136,7 +138,8 @@ void main()
 					refresh_array(pos, pos_new, example);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
-					can_move = 0;
+					//can_move = 0;
+					clock.restart();
 				}
 			}
 		}
