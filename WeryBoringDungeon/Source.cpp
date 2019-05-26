@@ -2,6 +2,7 @@
 #include "mazeTestPrinter.h"
 #include <stdlib.h>
 #include <time.h>
+#include "Output.h"
 #include "graphicsOutput.h"
 #include <SFML/Graphics.hpp>
 using namespace sf;
@@ -20,15 +21,7 @@ void main()
 	spase.window = &window;
 	prepare_textures(&spase);
 
-	char example[] = { "#########" 
-					   "#    #  #"
-					   "#       #"
-					   "#    #  #"
-					   "#   @   #"
-					   "#       #"
-					   "#    ####"
-					   "#       #" 
-					   "#########" };
+	char example[82];
 
 	P_POS pos;
 
@@ -37,8 +30,12 @@ void main()
 
 	P_POS pos_new;
 
-	maze_par.W = 40;
-	maze_par.H = 55;
+	int repeat_pos_generation = 1;
+
+
+
+	maze_par.W = 400;
+	maze_par.H = 550;
 
 	maze_par.max_W = 15;
 	maze_par.max_H = 15;
@@ -50,7 +47,26 @@ void main()
 
 	char * mazeArray = create_Maze_Array(&maze_par);
 
-	//output_TXT(mazeArray, &maze_par, "maze.txt");
+	do
+	{
+		pos.x = rand() % maze_par.H;
+		pos.y = rand() % maze_par.W;
+
+	} while (!check_full(pos, mazeArray, &maze_par));
+
+	printf_s("%d\n", pos.x);
+	printf_s("%d\n", pos.y);
+
+	//pos.x = 9;
+	//pos.y = 9;
+
+	//char * around = (char *)(malloc((9 * 9 + 10)* sizeof(char)));
+	char around[82];
+	//char * local_arround = makeMas(mazeArray, maze_par.W, maze_par.H, pos.y, pos.x, around);
+
+	get_Plase(&maze_par,&pos,mazeArray,around);
+
+	output_TXT(mazeArray, &maze_par, "maze.txt");
 
 	//char * test_display_output;
 	//TESTPAR console_display_par;
@@ -61,6 +77,19 @@ void main()
 	//output_test_TXT(test_display_output,console_display_par,"name.txt")
 
 	int can_move = 0;
+
+	char ex[] =
+	{
+		"#########"
+		"#     # #"
+		"#       #"
+		"#   @   #"
+		"#       #"
+		"###     #"
+		"#       #"
+		"#       #"
+		"#########"
+	};
 
 	clock.restart();
 	while (window.isOpen())
@@ -75,13 +104,13 @@ void main()
 		window.clear();
 		//window.draw(herosprite);//выводим спрайт на экран
 
-		refresh_textures(&spase, example);
+		refresh_textures(&spase, around);
 		draw_all(&spase);
 
-		//if (clock.getElapsedTime().asSeconds() > 0.2)
-		//{
-		//	can_move = 1;
-		//}
+		if (clock.getElapsedTime().asSeconds() > 0.2)
+		{
+			can_move = 1;
+		}
 
 		if (clock.getElapsedTime().asSeconds() > 0.2)
 		{
@@ -91,9 +120,15 @@ void main()
 				pos_new.x = pos.x - 1;
 				pos_new.y = pos.y;
 
-				if (check(pos_new, example))
+				//pos_new.x = pos.x;
+				//pos_new.y = pos.y - 1;
+
+				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					refresh_array(pos, pos_new, example);
+					//refresh_array(pos, pos_new, example);
+					//get_Plase(&maze_par, &pos, mazeArray, &around);
+					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
+					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
 					//can_move = 0;
@@ -105,9 +140,15 @@ void main()
 				pos_new.x = pos.x + 1;
 				pos_new.y = pos.y;
 
-				if (check(pos_new, example))
+				//pos_new.x = pos.x;
+				//pos_new.y = pos.y + 1;
+
+				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					refresh_array(pos, pos_new, example);
+					//refresh_array(pos, pos_new, example);
+					//get_Plase(&maze_par, &pos, mazeArray, &around);
+					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
+					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
 					//can_move = 0;
@@ -119,9 +160,15 @@ void main()
 				pos_new.x = pos.x;
 				pos_new.y = pos.y - 1;
 
-				if (check(pos_new, example))
+				//pos_new.x = pos.x - 1;
+				//pos_new.y = pos.y;
+
+				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					refresh_array(pos, pos_new, example);
+					//refresh_array(pos, pos_new, example);
+					//get_Plase(&maze_par, &pos, mazeArray, &around);
+					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
+					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
 					//can_move = 0;
@@ -132,19 +179,27 @@ void main()
 			{
 				pos_new.x = pos.x;
 				pos_new.y = pos.y + 1;
+				//pos_new.x = pos.x + 1;
+				//pos_new.y = pos.y;
 
-				if (check(pos_new, example))
+				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					refresh_array(pos, pos_new, example);
+					//refresh_array(pos, pos_new, example);
+					//get_Plase(&maze_par, &pos, mazeArray, &around);
+					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
+					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
 					//can_move = 0;
 					clock.restart();
 				}
 			}
+
 		}
 
 		window.display();
 	}
 
+
+	//free(around);
 }

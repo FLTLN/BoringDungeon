@@ -1,11 +1,13 @@
 #include "Output.h"
 
+
+
 char* makeMas(const char* par, int w, int h, int x, int y, char* mas)
 {
 	int len = 81;
-	printf("x = ");
+	printf("x = %d\n",x);
 	scanf_s("%d", &x);
-	printf("y = ");
+	printf("y = %d\n",y);
 	scanf_s("%d", &y);
 	int T = 0, B = 0, L = 0, R = 0;
 	if (x < 4)
@@ -132,4 +134,32 @@ char* makeMas(const char* par, int w, int h, int x, int y, char* mas)
 		printf("\n");
 	}
 	return mas;
+}
+
+void get_Plase(PAR * par, P_POS * position, char * maze,char * plase)
+{
+	int i, j,k;
+	printf_s("\n");
+
+	k = 0;
+	for (i = position->x - 4; i <= position->x + 4; i++)
+	{
+		for (j = position->y - 4; j <= position->y + 4; j++)
+		{
+
+			if ((i*par->H + j < 0) || (i*par->H + j > par->H*par->W))
+			{
+				*(plase + k) = '#';
+				printf_s("%c", *(plase + k));
+			}
+			else
+			{
+				*(plase + k) = *(maze + i * par->H + j);
+				printf_s("%c", *(plase + k));
+			}
+
+			k++;
+		}
+		printf_s("\n");
+	}
 }

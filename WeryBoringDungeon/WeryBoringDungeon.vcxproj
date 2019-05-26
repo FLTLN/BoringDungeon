@@ -22,11 +22,13 @@
     <ClInclude Include="graphicsOutput.h" />
     <ClInclude Include="mazeGenerator.h" />
     <ClInclude Include="mazeTestPrinter.h" />
+    <ClInclude Include="Output.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="graphicsOutput.cpp" />
     <ClCompile Include="mazeGenerator.cpp" />
     <ClCompile Include="mazeTestPrinter.cpp" />
+    <ClCompile Include="Output.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -88,6 +90,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
