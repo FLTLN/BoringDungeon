@@ -35,16 +35,12 @@ void refresh_textures(GAMESPASE * gamespase, char * plase)
 			break;
 		}
 
-		case '@':
-		{
-			(*(gamespase->sprites + i)).setTexture(gamespase->player);
-			break;
-		}
-
 		default:
 			break;
 		}
 	}
+
+	(*(gamespase->sprites + 4*9+4)).setTexture(gamespase->player);
 }
 
 void draw_all(GAMESPASE * gamespase)
@@ -59,6 +55,14 @@ void draw_all(GAMESPASE * gamespase)
 int check(P_POS pos, char * plase)
 {
 	if (*(plase + pos.x * 9 + pos.y) == '#') return 0;
+	else return 1;
+}
+
+int check_full(P_POS pos, char * plase,PAR * par)
+{
+	if (pos.x * par->H + pos.y > par->H*par->W) return 0;
+	if (pos.x * par->H + pos.y < 0) return 0;
+	if (*(plase + pos.x * par->H + pos.y) == '#') return 0;
 	else return 1;
 }
 

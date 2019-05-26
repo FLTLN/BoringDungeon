@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 using namespace sf;
+#include "mazeGenerator.h"
 
 
 typedef struct gamespase
@@ -26,5 +27,6 @@ void refresh_textures(GAMESPASE * gamespase, char * plase);
 void draw_all(GAMESPASE * gamespase);
 int check(P_POS pos, char * plase);
 void refresh_array(P_POS old_p, P_POS new_p, char * plase);
+int check_full(P_POS pos, char * plase, PAR * par);
 
 #endif // !__GOUTPUT_
