@@ -39,12 +39,12 @@ void refresh_textures(GAMESPASE * gamespase, char * plase)
 		{
 		case '#':
 		{
-			(*(gamespase->sprites + i)).setTexture(gamespase->wall);
+			(*(gamespase->sprites + i)).setTexture(*gamespase->wall);
 			break;
 		}
 		case ' ':
 		{
-			(*(gamespase->sprites + i)).setTexture(gamespase->path);
+			(*(gamespase->sprites + i)).setTexture(*gamespase->path);
 			break;
 		}
 		case 'd':

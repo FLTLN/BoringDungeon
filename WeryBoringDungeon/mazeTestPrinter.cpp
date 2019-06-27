@@ -4,8 +4,7 @@
 #include "mazeGenerator.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <png.h>
-#include <zlib.h>
+
 
 void output_TXT(char * mazeArray, PAR * par, const char * name)
 {
