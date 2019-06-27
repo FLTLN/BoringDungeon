@@ -19,17 +19,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="graphicsOutput.h" />
     <ClInclude Include="mazeGenerator.h" />
     <ClInclude Include="mazeTestPrinter.h" />
     <ClInclude Include="Output.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="structures_transformator.h" />
+    <ClInclude Include="struk.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="graphicsOutput.cpp" />
     <ClCompile Include="mazeGenerator.cpp" />
     <ClCompile Include="mazeTestPrinter.cpp" />
     <ClCompile Include="Output.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="structures_transformator.cpp" />
+    <ClCompile Include="struk.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="frag_shader.frag" />
+    <None Include="vert_shader.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
