@@ -20,16 +20,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphicsOutput.h" />
+    <ClInclude Include="makeEvent.h" />
     <ClInclude Include="mazeGenerator.h" />
     <ClInclude Include="mazeTestPrinter.h" />
     <ClInclude Include="Output.h" />
+    <ClInclude Include="struk.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="graphicsOutput.cpp" />
+    <ClCompile Include="makeEvent.cpp" />
     <ClCompile Include="mazeGenerator.cpp" />
     <ClCompile Include="mazeTestPrinter.cpp" />
     <ClCompile Include="Output.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="struk.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

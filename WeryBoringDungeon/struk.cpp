@@ -19,9 +19,9 @@ void up(CHARACTER* current_location) {
 }
 
 void boring_change(CHARACTER* boring_val){															//изменение скуки в течение игры
-	boring_val->boring_par->value = boring_val->boring_par->value+ boring_val->boring_par->change;
+	boring_val->boring_par->value += boring_val->boring_par->change;
 }
 
 void boring_change_event(CHARACTER* boring_val, int change) {									   //изменение скуки при событии
-	boring_val->boring_par->value = boring_val->boring_par->value+change;
+	boring_val->boring_par->value += change;
 }

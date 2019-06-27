@@ -1,10 +1,10 @@
 #ifndef _STRUK_
 
-typedef struct koordinats
+typedef struct coordinates
 {
 	int x;
 	int y;
-}KOORDINATS;
+}COORDINATES;
 
 typedef struct boring
 {
@@ -16,13 +16,13 @@ typedef struct boring
 
 typedef struct character
 {
-	KOORDINATS* koord_char;
+	COORDINATES* koord_char;
 	BORING* boring_par;
 }CHARACTER;
 
 typedef struct event
 {
-	KOORDINATS koord_event;
+	COORDINATES koord_event;
 	int effect;
 	char message[1000];
 }EVENT;
