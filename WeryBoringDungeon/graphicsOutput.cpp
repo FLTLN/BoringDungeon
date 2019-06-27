@@ -3,6 +3,23 @@
 void prepare_textures(GAMESPASE * gamespase)
 {
 	int i, j;
+	
+	gamespase->path = new Texture();
+	gamespase->wall = new Texture();
+	gamespase->step_d = new Texture();
+	gamespase->step_u = new Texture();
+	gamespase->step_l = new Texture();
+	gamespase->step_r = new Texture();
+	if (!(gamespase->wall)->loadFromFile("textures/wall.png"))
+	{
+		printf("unable to load texture!");
+	}
+	(gamespase->path)->loadFromFile("textures/path.png");
+	(gamespase->step_d)->loadFromFile("textures/step_d.png");
+	(gamespase->step_l)->loadFromFile("textures/step_l.png");
+	(gamespase->step_r)->loadFromFile("textures/step_r.png");
+	(gamespase->step_u)->loadFromFile("textures/step_u.png");
+	
 
 	for (i = 0; i < 9; i++)
 	{
@@ -11,10 +28,6 @@ void prepare_textures(GAMESPASE * gamespase)
 			(*(gamespase->sprites + i * 9 + j)).setPosition(float(i*100),float(j*100));
 		}
 	}
-
-	(gamespase->wall).loadFromFile("textures/wall.png");
-	(gamespase->path).loadFromFile("textures/path.png");
-	(gamespase->player).loadFromFile("textures/player.png");
 }
 
 void refresh_textures(GAMESPASE * gamespase, char * plase)
@@ -34,6 +47,26 @@ void refresh_textures(GAMESPASE * gamespase, char * plase)
 			(*(gamespase->sprites + i)).setTexture(gamespase->path);
 			break;
 		}
+		case 'd':
+		{
+			(*(gamespase->sprites + i)).setTexture(*gamespase->step_d);
+			break;
+		}
+		case 'u':
+		{
+			(*(gamespase->sprites + i)).setTexture(*gamespase->step_u);
+			break;
+		}
+		case 'r':
+		{
+			(*(gamespase->sprites + i)).setTexture(*gamespase->step_r);
+			break;
+		}
+		case 'l':
+		{
+			(*(gamespase->sprites + i)).setTexture(*gamespase->step_l);
+			break;
+		}
 
 		default:
 			break;
@@ -43,12 +76,12 @@ void refresh_textures(GAMESPASE * gamespase, char * plase)
 	(*(gamespase->sprites + 4*9+4)).setTexture(gamespase->player);
 }
 
-void draw_all(GAMESPASE * gamespase)
+void draw_all(GAMESPASE * gamespase, sf::Shader* shader)
 {
 	int i;
 	for (i = 0; i < 9 * 9; i++)
 	{
-		(*(gamespase->window)).draw(*(gamespase->sprites + i));
+		(*(gamespase->window)).draw(*(gamespase->sprites + i), shader);
 	}
 }
 
