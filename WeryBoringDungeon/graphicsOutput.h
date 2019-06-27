@@ -11,8 +11,9 @@ typedef struct gamespase
 	RenderWindow * window;
 	Sprite sprites[81];
 
-	Texture wall;
-	Texture path;
+	Texture* wall;
+	Texture* path;
+	Texture* step_u, *step_d, *step_l, *step_r;
 	Texture player;
 
 }GAMESPASE;
@@ -24,7 +25,7 @@ typedef struct p_pos
 
 void prepare_textures(GAMESPASE * gamespase);
 void refresh_textures(GAMESPASE * gamespase, char * plase);
-void draw_all(GAMESPASE * gamespase);
+void draw_all(GAMESPASE * gamespase, sf::Shader* shader);
 int check(P_POS pos, char * plase);
 void refresh_array(P_POS old_p, P_POS new_p, char * plase);
 int check_full(P_POS pos, char * plase, PAR * par);
