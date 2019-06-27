@@ -19,7 +19,6 @@ void main()
 	PAR maze_par;
 
 	Clock clock;
-	//float time = clock.getElapsedTime().asMicroseconds(); //дать прошедшее время в микросекундах
 
 	Image playerImage;
 	playerImage.loadFromFile("textures/player.png");
@@ -70,24 +69,10 @@ void main()
 	printf_s("%d\n", pos.x);
 	printf_s("%d\n", pos.y);
 
-	//pos.x = 9;
-	//pos.y = 9;
-
-	//char * around = (char *)(malloc((9 * 9 + 10)* sizeof(char)));
 	char around[82];
-	//char * local_arround = makeMas(mazeArray, maze_par.W, maze_par.H, pos.y, pos.x, around);
 
 	get_Plase(&maze_par,&pos,mazeArray,around);
 
-	output_TXT(mazeArray, &maze_par, "maze.txt");
-
-	//char * test_display_output;
-	//TESTPAR console_display_par;
-	//console_display_par.W = 999;
-	//console_display_par.H = 999;
-	// char * someFunction(char *, POINT *)
-	//test_display_output = some_function(mazeArray,playerPosition)
-	//output_test_TXT(test_display_output,console_display_par,"name.txt")
 
 	int can_move = 0;
 
@@ -104,18 +89,6 @@ void main()
 	shader.setUniform("lightSize", Glsl::Vec2(0.3, 0));
 	//////////////////////////////
 
-	char ex[] =
-	{
-		"#########"
-		"#     # #"
-		"#       #"
-		"#   @   #"
-		"#       #"
-		"###     #"
-		"#       #"
-		"#       #"
-		"#########"
-	};
 	sf::Clock fpsClock;
 
 	clock.restart();
@@ -128,11 +101,9 @@ void main()
 				window.close();
 		}
 
-		//float elapsedTime = 1.f / fpsClock.getElapsedTime().asMilliseconds();
 
 		float elapsedTime = fpsClock.getElapsedTime().asMicroseconds(); //дать прошедшее время в микросекундах
 		
-		//elapsedTime = elapsedTime / 300; //скорость игры
 
 		player->playAnimation(direction);
 
@@ -162,15 +133,8 @@ void main()
 				pos_new.y = pos.y;
 				direction = "moveLeft";
 
-
-				//pos_new.x = pos.x;
-				//pos_new.y = pos.y - 1;
-
 				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					//refresh_array(pos, pos_new, example);
-					//get_Plase(&maze_par, &pos, mazeArray, &around);
-					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
@@ -189,14 +153,9 @@ void main()
 				pos_new.y = pos.y;
 				direction = "moveRight";
 
-				//pos_new.x = pos.x;
-				//pos_new.y = pos.y + 1;
-
 				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					//refresh_array(pos, pos_new, example);
-					//get_Plase(&maze_par, &pos, mazeArray, &around);
-					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
+
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
@@ -212,19 +171,15 @@ void main()
 				pos_new.y = pos.y - 1;
 				direction = "moveUp";
 
-				//pos_new.x = pos.x - 1;
-				//pos_new.y = pos.y;
+
 
 				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					//refresh_array(pos, pos_new, example);
-					//get_Plase(&maze_par, &pos, mazeArray, &around);
-					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
+
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
 					mazeArray[pos.x * maze_par.W + pos.y] = 'u';
-					//can_move = 0;
 					clock.restart();
 				}
 			}
@@ -235,34 +190,23 @@ void main()
 
 				direction = "moveDown";
 
-				//pos_new.x = pos.x + 1;
-				//pos_new.y = pos.y;
-
-
-				//footSteps.emplace_back(new Steps(2, pos.x * 81, pos.y * 81));
-				
-				//refresh_array(pos, pos_new, mazeArray, '#');
 				if (check_full(pos_new, mazeArray, &maze_par))
 				{
 
-					//get_Plase(&maze_par, &pos, mazeArray, &around);
-					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
 					mazeArray[pos.x * maze_par.W + pos.y] = 'd';
-					//can_move = 0;
+
 
 
 					clock.restart();
 				}
-				//refresh_array(pos, pos_new, mazeArray);
+
 			}
 		}
-		fpsClock.restart(); //перезагружает время
+		fpsClock.restart(); 
 		window.display();
 	}
 
-
-	//free(around);
 }
