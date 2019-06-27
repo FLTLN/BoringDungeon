@@ -25,6 +25,8 @@
     <ClInclude Include="mazeTestPrinter.h" />
     <ClInclude Include="Output.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="structures_transformator.h" />
+    <ClInclude Include="struk.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
@@ -34,6 +36,8 @@
     <ClCompile Include="Output.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="structures_transformator.cpp" />
+    <ClCompile Include="struk.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="frag_shader.frag" />

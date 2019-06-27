@@ -9,6 +9,8 @@
 #include <time.h>
 #include "Output.h"
 #include "graphicsOutput.h"
+#include "struk.h"
+#include "structures_transformator.h"
 //#include <SFML/Graphics.hpp>
 using namespace sf;
 
@@ -19,7 +21,6 @@ void main()
 	PAR maze_par;
 
 	Clock clock;
-	//float time = clock.getElapsedTime().asMicroseconds(); //дать прошедшее время в микросекундах
 
 	Image playerImage;
 	playerImage.loadFromFile("textures/player.png");
@@ -70,24 +71,18 @@ void main()
 	printf_s("%d\n", pos.x);
 	printf_s("%d\n", pos.y);
 
-	//pos.x = 9;
-	//pos.y = 9;
-
-	//char * around = (char *)(malloc((9 * 9 + 10)* sizeof(char)));
 	char around[82];
-	//char * local_arround = makeMas(mazeArray, maze_par.W, maze_par.H, pos.y, pos.x, around);
 
 	get_Plase(&maze_par,&pos,mazeArray,around);
 
-	output_TXT(mazeArray, &maze_par, "maze.txt");
+	CHARACTER * main_character = character_init();
 
-	//char * test_display_output;
-	//TESTPAR console_display_par;
-	//console_display_par.W = 999;
-	//console_display_par.H = 999;
-	// char * someFunction(char *, POINT *)
-	//test_display_output = some_function(mazeArray,playerPosition)
-	//output_test_TXT(test_display_output,console_display_par,"name.txt")
+	P_POS_to_COORDINATES(main_character->koord_char, &pos);
+	boring_change_event(main_character,20);
+	main_character->boring_par->value = 2000;
+	main_character->boring_par->max_val = 2000;
+	main_character->boring_par->change = -1;
+
 
 	int can_move = 0;
 
@@ -104,18 +99,6 @@ void main()
 	shader.setUniform("lightSize", Glsl::Vec2(0.3, 0));
 	//////////////////////////////
 
-	char ex[] =
-	{
-		"#########"
-		"#     # #"
-		"#       #"
-		"#   @   #"
-		"#       #"
-		"###     #"
-		"#       #"
-		"#       #"
-		"#########"
-	};
 	sf::Clock fpsClock;
 
 	clock.restart();
@@ -128,11 +111,13 @@ void main()
 				window.close();
 		}
 
-		//float elapsedTime = 1.f / fpsClock.getElapsedTime().asMilliseconds();
+		if (is_bored(main_character))
+		{
+			window.close();
+		}
 
 		float elapsedTime = fpsClock.getElapsedTime().asMicroseconds(); //дать прошедшее время в микросекундах
 		
-		//elapsedTime = elapsedTime / 300; //скорость игры
 
 		player->playAnimation(direction);
 
@@ -162,21 +147,16 @@ void main()
 				pos_new.y = pos.y;
 				direction = "moveLeft";
 
-
-				//pos_new.x = pos.x;
-				//pos_new.y = pos.y - 1;
-
 				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					//refresh_array(pos, pos_new, example);
-					//get_Plase(&maze_par, &pos, mazeArray, &around);
-					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
+					P_POS_to_COORDINATES(main_character->koord_char, &pos);
 					can_move = 0;
 					mazeArray[pos.x * maze_par.W + pos.y] = 'l';
 
+					boring_change(main_character);
 
 					clock.restart();
 
@@ -189,19 +169,18 @@ void main()
 				pos_new.y = pos.y;
 				direction = "moveRight";
 
-				//pos_new.x = pos.x;
-				//pos_new.y = pos.y + 1;
-
 				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					//refresh_array(pos, pos_new, example);
-					//get_Plase(&maze_par, &pos, mazeArray, &around);
-					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
+
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
+					P_POS_to_COORDINATES(main_character->koord_char, &pos);
 					can_move = 0;
 					mazeArray[pos.x * maze_par.W + pos.y] = 'r';
+
+					boring_change(main_character);
+
 					clock.restart();
 					
 				}
@@ -212,19 +191,19 @@ void main()
 				pos_new.y = pos.y - 1;
 				direction = "moveUp";
 
-				//pos_new.x = pos.x - 1;
-				//pos_new.y = pos.y;
+
 
 				if (check_full(pos_new, mazeArray, &maze_par))
 				{
-					//refresh_array(pos, pos_new, example);
-					//get_Plase(&maze_par, &pos, mazeArray, &around);
-					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
+
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
+					P_POS_to_COORDINATES(main_character->koord_char, &pos);
 					mazeArray[pos.x * maze_par.W + pos.y] = 'u';
-					//can_move = 0;
+
+					boring_change(main_character);
+
 					clock.restart();
 				}
 			}
@@ -235,34 +214,24 @@ void main()
 
 				direction = "moveDown";
 
-				//pos_new.x = pos.x + 1;
-				//pos_new.y = pos.y;
-
-
-				//footSteps.emplace_back(new Steps(2, pos.x * 81, pos.y * 81));
-				
-				//refresh_array(pos, pos_new, mazeArray, '#');
 				if (check_full(pos_new, mazeArray, &maze_par))
 				{
 
-					//get_Plase(&maze_par, &pos, mazeArray, &around);
-					//around = makeMas(mazeArray, maze_par.W, maze_par.H, pos_new.x, pos_new.y, around);
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
+					P_POS_to_COORDINATES(main_character->koord_char, &pos);
 					mazeArray[pos.x * maze_par.W + pos.y] = 'd';
-					//can_move = 0;
 
+					boring_change(main_character);
 
 					clock.restart();
 				}
-				//refresh_array(pos, pos_new, mazeArray);
+
 			}
 		}
-		fpsClock.restart(); //перезагружает время
+		fpsClock.restart(); 
 		window.display();
 	}
 
-
-	//free(around);
 }

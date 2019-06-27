@@ -1,4 +1,5 @@
-#ifndef _STRUK_
+#ifndef __STRUK_
+#define __STRUK_
 
 typedef struct coordinates
 {
@@ -26,5 +27,14 @@ typedef struct event
 	int effect;
 	char message[1000];
 }EVENT;
+
+void right(CHARACTER* current_location);
+void left(CHARACTER* current_location);
+void down(CHARACTER* current_location);
+void up(CHARACTER* current_location);
+void boring_change(CHARACTER* boring_val);
+void boring_change_event(CHARACTER* boring_val, int change);
+CHARACTER * character_init();
+int is_bored(CHARACTER * character);
 
 #endif // STRUK

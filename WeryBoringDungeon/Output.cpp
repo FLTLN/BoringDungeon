@@ -139,7 +139,7 @@ char* makeMas(const char* par, int w, int h, int x, int y, char* mas)
 void get_Plase(PAR * par, P_POS * position, char * maze,char * plase)
 {
 	int i, j,k;
-	printf_s("\n");
+	//printf_s("\n");
 
 	k = 0;
 	for (i = position->x - 4; i <= position->x + 4; i++)
@@ -150,16 +150,16 @@ void get_Plase(PAR * par, P_POS * position, char * maze,char * plase)
 			if ((i*par->H + j < 0) || (i*par->H + j > par->H*par->W))
 			{
 				*(plase + k) = '#';
-				printf_s("%c", *(plase + k));
+				//printf_s("%c", *(plase + k));
 			}
 			else
 			{
 				*(plase + k) = *(maze + i * par->H + j);
-				printf_s("%c", *(plase + k));
+				//printf_s("%c", *(plase + k));
 			}
 
 			k++;
 		}
-		printf_s("\n");
+		//printf_s("\n");
 	}
 }
