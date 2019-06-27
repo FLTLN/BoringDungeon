@@ -9,6 +9,8 @@
 #include <time.h>
 #include "Output.h"
 #include "graphicsOutput.h"
+#include "struk.h"
+#include "structures_transformator.h"
 //#include <SFML/Graphics.hpp>
 using namespace sf;
 
@@ -73,6 +75,14 @@ void main()
 
 	get_Plase(&maze_par,&pos,mazeArray,around);
 
+	CHARACTER * main_character = character_init();
+
+	P_POS_to_COORDINATES(main_character->koord_char, &pos);
+	boring_change_event(main_character,20);
+	main_character->boring_par->value = 2000;
+	main_character->boring_par->max_val = 2000;
+	main_character->boring_par->change = -1;
+
 
 	int can_move = 0;
 
@@ -101,6 +111,10 @@ void main()
 				window.close();
 		}
 
+		if (is_bored(main_character))
+		{
+			window.close();
+		}
 
 		float elapsedTime = fpsClock.getElapsedTime().asMicroseconds(); //дать прошедшее время в микросекундах
 		
@@ -138,9 +152,11 @@ void main()
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
+					P_POS_to_COORDINATES(main_character->koord_char, &pos);
 					can_move = 0;
 					mazeArray[pos.x * maze_par.W + pos.y] = 'l';
 
+					boring_change(main_character);
 
 					clock.restart();
 
@@ -159,8 +175,12 @@ void main()
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
+					P_POS_to_COORDINATES(main_character->koord_char, &pos);
 					can_move = 0;
 					mazeArray[pos.x * maze_par.W + pos.y] = 'r';
+
+					boring_change(main_character);
+
 					clock.restart();
 					
 				}
@@ -179,7 +199,11 @@ void main()
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
+					P_POS_to_COORDINATES(main_character->koord_char, &pos);
 					mazeArray[pos.x * maze_par.W + pos.y] = 'u';
+
+					boring_change(main_character);
+
 					clock.restart();
 				}
 			}
@@ -196,9 +220,10 @@ void main()
 					get_Plase(&maze_par, &pos_new, mazeArray, around);
 					pos.x = pos_new.x;
 					pos.y = pos_new.y;
+					P_POS_to_COORDINATES(main_character->koord_char, &pos);
 					mazeArray[pos.x * maze_par.W + pos.y] = 'd';
 
-
+					boring_change(main_character);
 
 					clock.restart();
 				}

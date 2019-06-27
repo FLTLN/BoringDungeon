@@ -21,6 +21,7 @@ void up(CHARACTER* current_location) {
 
 void boring_change(CHARACTER* boring_val){															//изменение скуки в течение игры
 	boring_val->boring_par->value += boring_val->boring_par->change;
+	printf_s("%d boring \n", boring_val->boring_par->value);
 }
 
 void boring_change_event(CHARACTER* boring_val, int change) {									   //изменение скуки при событии
@@ -38,6 +39,6 @@ CHARACTER * character_init()
 
 int is_bored(CHARACTER * character)
 {
-	if (character->boring_par->value <= 0) return 0;
-	else return 1;
+	if (character->boring_par->value <= 0) return 1;
+	else return 0;
 };
